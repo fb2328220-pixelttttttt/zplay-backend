@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: '*',
   credentials: true,
 }));
 app.use(express.json());
@@ -29,7 +29,6 @@ const PORT = process.env.PORT || 5000;
 
 if (!process.env.MONGODB_URI || process.env.MONGODB_URI.includes('YOUR_USERNAME')) {
   console.error('❌  ERROR: MONGODB_URI is not set in your .env file.');
-  console.error('👉  Open backend/.env and replace YOUR_USERNAME and YOUR_PASSWORD with your MongoDB Atlas credentials.');
   process.exit(1);
 }
 
@@ -41,6 +40,5 @@ mongoose
   })
   .catch((err) => {
     console.error('❌  MongoDB connection error:', err.message);
-    console.error('👉  Check your MONGODB_URI in backend/.env — make sure the username, password and cluster URL are correct.');
     process.exit(1);
   });
